@@ -35,6 +35,9 @@
 let hasRefused = false;
 
 function runGame(){
+    // ✅新增：每次提交，自动清空输入框内容
+    document.getElementById("answerInput").value = "";
+
     const userInput = document.getElementById("answerInput").value.trim();
     if (userInput === "愿意"){
         if(hasRefused){
@@ -51,7 +54,7 @@ function runGame(){
         }else{
             // 第一次不愿意，开启二次询问标记
             hasRefused = true;
-            document.getElementById("result").innerText = "不要嘛 再考虑一下呗";
+            document.getElementById("result").innerText = "不要嘛 再考虑一下";
         }
     }else{
         document.getElementById("result").innerText = "❌只能输入【愿意】或者【不愿意】，请重新输入！";
