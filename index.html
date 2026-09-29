@@ -35,10 +35,11 @@
 let hasRefused = false;
 
 function runGame(){
-    // ✅新增：每次提交，自动清空输入框内容
+    // 第一步：先读取用户输入
+    const userInput = document.getElementById("answerInput").value.trim();
+    // 第二步：读取完成之后，清空输入框
     document.getElementById("answerInput").value = "";
 
-    const userInput = document.getElementById("answerInput").value.trim();
     if (userInput === "愿意"){
         if(hasRefused){
             // 先拒绝，之后再选愿意
