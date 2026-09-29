@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>请我喝奶茶</title>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
     <style>
         body {
             font-family: system-ui;
@@ -25,32 +24,20 @@
 </head>
 <body>
     <div>问题：你愿意给我三十块让我喝杯奶茶吗？</div>
-    <div id="result">正在加载Python环境，请稍候...</div>
+    <div id="result">在这里输入回答，点提交！</div>
 
     <br>
     <input type="text" id="answerInput" placeholder="在这里输入回答">
     <button onclick="runGame()">提交答案</button>
 
 <script>
-let pyodide;
-async function loadPy(){
-    pyodide = await loadPyodide();
-    document.getElementById("result").innerText = "加载完成！在下方输入回答";
-}
-loadPy();
-
 function runGame(){
     const userInput = document.getElementById("answerInput").value;
-    const code = `
-answer = "${userInput}"
-if answer == "愿意":
-    res = "爱你妈咪！"
-else:
-    res = "纯纯穷人思维"
-`
-    pyodide.runPython(code);
-    let res = pyodide.globals.get("res");
-    document.getElementById("result").innerText = res
+    if (userInput == "愿意"){
+        document.getElementById("result").innerText = "太好了！谢谢妈咪"
+    }else{
+        document.getElementById("result").innerText = "纯纯穷人思维"
+    }
 }
 </script>
 </body>
