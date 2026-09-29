@@ -2,7 +2,6 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- ✅ 手机适配核心代码，必须加上！ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>请我喝奶茶</title>
     <style>
@@ -10,6 +9,7 @@
             box-sizing: border-box;
             margin:0;
             padding:0;
+            touch-action: manipulation; /* 消除手机点击延迟 */
         }
         body {
             font-family: system-ui, sans-serif;
@@ -18,12 +18,12 @@
             display:flex;
             flex-direction:column;
             align-items:center;
-            padding:80px 20px; /* 左右留边，手机不会贴屏幕边缘 */
+            padding:80px 20px;
             font-size: 22px;
         }
         .box{
             text-align:center;
-            max-width:420px; /* 限制最大宽度，手机友好 */
+            max-width:420px;
             width:100%;
         }
         #question{
@@ -55,7 +55,8 @@
             color:white;
             cursor:pointer;
         }
-        button:hover {
+        /* 手机触摸按下效果（手机没有hover） */
+        button:active {
             background-color:#d46880;
         }
     </style>
@@ -70,18 +71,15 @@
     </div>
 
 <script>
-// 标记：用户是否已经拒绝过一次
 let hasRefused = false;
 
 function runGame(){
-    // 第一步：先读取用户输入
     const userInput = document.getElementById("answerInput").value.trim();
-    // 第二步：读取完成之后，清空输入框
     document.getElementById("answerInput").value = "";
 
     if (userInput === "愿意"){
         if(hasRefused){
-            document.getElementById("result").innerText = "穷人就是需要敲打的 算你还有一丝觉悟";
+            document.getElementById("result").innerText = "穷人就是需要敲打的 还算你有一丝觉悟";
         }else{
             document.getElementById("result").innerText = "谢谢妈咪！你是好人";
         }
