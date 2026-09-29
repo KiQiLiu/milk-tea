@@ -4,31 +4,68 @@
     <meta charset="UTF-8">
     <title>请我喝奶茶</title>
     <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding:0;
+        }
         body {
-            font-family: system-ui;
-            padding: 30px;
+            font-family: system-ui, sans-serif;
+            background-color: #fff7f7;
+            min-height: 100vh;
+            /* 页面整体居中 */
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            padding-top:80px;
             font-size: 22px;
         }
-        #result {margin-top:20px;}
+        .box{
+            text-align:center;
+        }
+        #question{
+            margin-bottom:24px;
+        }
+        #result {
+            margin-bottom:24px;
+            color:#c84868;
+            font-weight:500;
+        }
         input{
             font-size:20px;
-            padding:8px;
-            width:300px;
+            padding:10px 14px;
+            width:320px;
+            border: 1px solid #e2b1bc;
+            border-radius:10px;
+            outline:none;
+        }
+        input:focus{
+            border-color:#d8788c;
         }
         button {
             font-size:20px;
-            padding:8px 16px;
-            margin:5px;
+            padding:10px 22px;
+            margin-left:8px;
+            border:none;
+            border-radius:10px;
+            background-color:#e8889c;
+            color:white;
+            cursor:pointer;
+        }
+        /* 鼠标放上去按钮变深一点 */
+        button:hover {
+            background-color:#d46880;
         }
     </style>
 </head>
 <body>
-    <div>问题：你愿意给我三十块让我喝杯奶茶吗？</div>
-    <div id="result">在这里输入回答，点提交！（请填写：愿意 或者 不愿意）</div>
+    <div class="box">
+        <div id="question">问题：你愿意给我三十块让我喝杯奶茶吗？</div>
+        <div id="result">在这里输入回答，点提交！（请填写：愿意 或者 不愿意）</div>
 
-    <br>
-    <input type="text" id="answerInput" placeholder="在这里输入回答">
-    <button onclick="runGame()">提交答案</button>
+        <input type="text" id="answerInput" placeholder="在这里输入回答">
+        <button onclick="runGame()">提交答案</button>
+    </div>
 
 <script>
 // 标记：用户是否已经拒绝过一次
@@ -43,7 +80,7 @@ function runGame(){
     if (userInput === "愿意"){
         if(hasRefused){
             // 先拒绝，之后再选愿意
-            document.getElementById("result").innerText = "穷人就是需要敲打的 算你有一丝觉悟";
+            document.getElementById("result").innerText = "穷人就是需要敲打的";
         }else{
             // 第一次就直接愿意
             document.getElementById("result").innerText = "谢谢妈咪！你是好人";
