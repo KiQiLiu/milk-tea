@@ -11,6 +11,11 @@
             font-size: 22px;
         }
         #result {margin-top:20px;}
+        input{
+            font-size:20px;
+            padding:8px;
+            width:300px;
+        }
         button {
             font-size:20px;
             padding:8px 16px;
@@ -22,20 +27,31 @@
     <div>问题：你愿意给我三十块让我喝杯奶茶吗？</div>
     <div id="result">正在加载Python环境，请稍候...</div>
 
-    <script>
-        async function main() {
-            let pyodide = await loadPyodide();
-            const code = `
-answer = input("输入你的回答：")
+    <br>
+    <input type="text" id="answerInput" placeholder="在这里输入回答">
+    <button onclick="runGame()">提交答案</button>
+
+<script>
+let pyodide;
+async function loadPy(){
+    pyodide = await loadPyodide();
+    document.getElementById("result").innerText = "加载完成！在下方输入回答";
+}
+loadPy();
+
+function runGame(){
+    const userInput = document.getElementById("answerInput").value;
+    const code = `
+answer = "${userInput}"
 if answer == "愿意":
-    print("太棒啦！谢谢妈咪！")
+    res = "爱你妈咪！"
 else:
-    print("我操你妈穷人思维")
-`;
-            document.getElementById("result").innerText = "加载完成！在下方输入回答";
-            pyodide.runPython(code);
-        }
-        main();
-    </script>
+    res = "纯纯穷人思维"
+`
+    pyodide.runPython(code);
+    let res = pyodide.globals.get("res");
+    document.getElementById("result").innerText = res
+}
+</script>
 </body>
 </html>
