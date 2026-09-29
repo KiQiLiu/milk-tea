@@ -24,7 +24,7 @@
 </head>
 <body>
     <div>问题：你愿意给我三十块让我喝杯奶茶吗？</div>
-    <div id="result">在这里输入回答，点提交！</div>
+    <div id="result">在这里输入回答，点提交！（请填写：愿意 或者 不愿意）</div>
 
     <br>
     <input type="text" id="answerInput" placeholder="在这里输入回答">
@@ -33,10 +33,13 @@
 <script>
 function runGame(){
     const userInput = document.getElementById("answerInput").value;
-    if (userInput == "愿意"){
-        document.getElementById("result").innerText = "太好了！谢谢妈咪"
+    if (userInput === "愿意"){
+        document.getElementById("result").innerText = "谢谢妈咪！";
+    }else if(userInput === "不愿意"){
+        document.getElementById("result").innerText = "要不要再考虑一下？";
     }else{
-        document.getElementById("result").innerText = "纯纯穷人思维"
+        // 输入既不是愿意、也不是不愿意，要求重新输入
+        document.getElementById("result").innerText = "只能输入【愿意】或者【不愿意】，请重新输入！";
     }
 }
 </script>
