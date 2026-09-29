@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>请我喝奶茶</title>
+    <meta charset="UTF-8">
+    <title>请我喝奶茶</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <style>
+        body {
+            font-family: system-ui;
+            padding: 30px;
+            font-size: 22px;
+        }
+        #result {margin-top:20px;}
+        button {
+            font-size:20px;
+            padding:8px 16px;
+            margin:5px;
+        }
+    </style>
 </head>
 <body>
-<h3>问题：你愿意给我三十块让我喝杯奶茶吗？</h3>
-<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
-<script>
-async function runPython() {
-  let pyodide = await loadPyodide();
-  const code = `
-print("问题：你愿意给我三十块让我喝杯奶茶吗？")
-print("A：愿意")
-print("B：不愿意")
+    <div>问题：你愿意给我三十块让我喝杯奶茶吗？</div>
+    <div id="result">正在加载Python环境，请稍候...</div>
 
-choice = input("请输入你的选择（A/B）：")
-
-if choice.upper() == "A":
-    print("太好了！谢谢你妈咪")
-elif choice.upper() == "B":
-    print("臭穷人我重新给你一次思考的机会")
-    again = input("再考虑一下吗？(A:愿意 / B:坚持不愿意)")
-    if again.upper() == "A":
-        print("哦妈咪谢谢你")
-    elif again.upper() == "B":
-        print("我操了阿帕兹了呀纯纯穷人思维")
-    else:
-        print("输入无效，默认你不愿意咯")
+    <script>
+        async function main() {
+            let pyodide = await loadPyodide();
+            const code = `
+answer = input("输入你的回答：")
+if answer == "愿意":
+    print("太棒啦！谢谢妈咪！")
 else:
-    print("输入错误，请只能输入A或者B！")
+    print("我操你妈穷人思维")
 `;
-  await pyodide.runPythonAsync(code);
-}
-runPython();
-</script>
+            document.getElementById("result").innerText = "加载完成！在下方输入回答";
+            pyodide.runPython(code);
+        }
+        main();
+    </script>
 </body>
 </html>
