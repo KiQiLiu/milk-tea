@@ -31,15 +31,30 @@
     <button onclick="runGame()">提交答案</button>
 
 <script>
+// 标记：用户是否已经拒绝过一次
+let hasRefused = false;
+
 function runGame(){
-    const userInput = document.getElementById("answerInput").value;
+    const userInput = document.getElementById("answerInput").value.trim();
     if (userInput === "愿意"){
-        document.getElementById("result").innerText = "谢谢妈咪！";
+        if(hasRefused){
+            // 先拒绝，之后再选愿意
+            document.getElementById("result").innerText = "穷人就是需要敲打的";
+        }else{
+            // 第一次就直接愿意
+            document.getElementById("result").innerText = "谢谢妈咪！你是好人";
+        }
     }else if(userInput === "不愿意"){
-        document.getElementById("result").innerText = "要不要再考虑一下？";
+        if(hasRefused){
+            // 第二次依旧不愿意
+            document.getElementById("result").innerText = "没救了 纯纯穷人思维";
+        }else{
+            // 第一次不愿意，开启二次询问标记
+            hasRefused = true;
+            document.getElementById("result").innerText = "不要嘛 再考虑一下呗";
+        }
     }else{
-        // 输入既不是愿意、也不是不愿意，要求重新输入
-        document.getElementById("result").innerText = "只能输入【愿意】或者【不愿意】，请重新输入！";
+        document.getElementById("result").innerText = "❌只能输入【愿意】或者【不愿意】，请重新输入！";
     }
 }
 </script>
